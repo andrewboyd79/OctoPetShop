@@ -51,6 +51,41 @@ step "generate-db-delta-report" {
     }
 }
 
+step "manual-review-of-db-changes" {
+    name = "Manual Review of DB changes"
+
+    action {
+        action_type = "Octopus.Manual"
+        properties = {
+            Octopus.Action.Manual.BlockConcurrentDeployments = "True"
+            Octopus.Action.Manual.Instructions = "**Review changes to be made to DB**"
+            Octopus.Action.Manual.ResponsibleTeamIds = "dba,global/octopus-managers"
+        }
+    }
+}
+
+step "deploy-db-changes" {
+    name = "Deploy DB Changes"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                $packagePath = $OctopusParameters["Octopus.Action.Package[Trident.Database].ExtractedPath"]
+                $connectionString = $OctopusParameters["Project.Connection.String"]
+                
+                cd $packagePath
+                $appToRun = ".\Octopus.Trident.Database.DbUp"
+                
+                & $appToRun --ConnectionString="$connectionString"
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool = "default-worker-pool-1"
+    }
+}
+
 step "deploy-a-package" {
     name = "Deploy a Package"
     properties = {
