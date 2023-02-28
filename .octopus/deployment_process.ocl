@@ -31,7 +31,7 @@ step "generate-db-delta-report" {
         notes = "**Will generate a delta report"
         properties = {
             Octopus.Action.Script.ScriptBody = <<-EOT
-                $packagePath = $OctopusParameters["Octopus.Action.Package[SingeleRepoTrident.Database].ExtractedPath"]
+                $packagePath = $OctopusParameters["Octopus.Action.Package[SingelerepoTrident.Database].ExtractedPath"]
                 $connectionString = $OctopusParameters["Project.Connection.String"]
                 $environmentName = $OctopusParameters["Octopus.Environment.Name"]
                 $reportPath = $OctopusParameters["Project.Database.Report.Path"]
