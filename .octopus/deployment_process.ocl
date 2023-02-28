@@ -31,7 +31,7 @@ step "generate-db-delta-report" {
         notes = "**Will generate a delta report"
         properties = {
             Octopus.Action.Script.ScriptBody = <<-EOT
-                $packagePath = $OctopusParameters["Octopus.Action.Package[Trident.Database].ExtractedPath"]
+                $packagePath = $OctopusParameters["Octopus.Action.Package[SingeleRepoTrident.Database].ExtractedPath"]
                 $connectionString = $OctopusParameters["Project.Connection.String"]
                 $environmentName = $OctopusParameters["Octopus.Environment.Name"]
                 $reportPath = $OctopusParameters["Project.Database.Report.Path"]
@@ -60,6 +60,7 @@ step "manual-review-of-db-changes" {
             Octopus.Action.Manual.BlockConcurrentDeployments = "True"
             Octopus.Action.Manual.Instructions = "**Review changes to be made to DB**"
             Octopus.Action.Manual.ResponsibleTeamIds = "dba,global/octopus-managers"
+            Octopus.Action.RunOnServer = "false"
         }
     }
 }
