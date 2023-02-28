@@ -1,5 +1,5 @@
 step "run-create-trident-database-runbacks" {
-    name = "Run 'Create Trident Database' runbacks"
+    name = "Run 'Create Trident Database' runbook"
 
     action {
         notes = "**Runs on all environments**"
@@ -14,7 +14,7 @@ step "run-create-trident-database-runbacks" {
             Run.Runbook.Environment.Name = "#{Octopus.Environment.Name}"
             Run.Runbook.Machines = "N/A"
             Run.Runbook.ManualIntervention.EnvironmentToUse = "#{Octopus.Environment.Name}"
-            Run.Runbook.Name = "Create Trident Database"
+            Run.Runbook.Name = "CreateTridentDatabase"
             Run.Runbook.Space.Name = "#{Octopus.Space.Name}"
             Run.Runbook.UsePublishedSnapShot = "True"
             Run.Runbook.Waitforfinish = "True"
