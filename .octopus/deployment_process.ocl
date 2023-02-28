@@ -35,6 +35,7 @@ step "deploy-a-package" {
             Octopus.Action.Package.FeedId = "octopus-server-built-in"
             Octopus.Action.Package.JsonConfigurationVariablesTargets = "appSettings.json"
             Octopus.Action.Package.PackageId = "SingleRepoTrident.Web"
+            Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
 
@@ -72,6 +73,7 @@ step "send-email-notification" {
 
     action {
         action_type = "Octopus.Email"
+        is_disabled = true
         notes = <<-EOT
                 **Sends email notification on Success**
                 Email addresses can be configured through the Trident Notifications team configuration
@@ -80,6 +82,7 @@ step "send-email-notification" {
             Octopus.Action.Email.Body = "#{Notification.Body.Text}"
             Octopus.Action.Email.Subject = "#{Notification.Subject.Text}"
             Octopus.Action.Email.ToTeamIds = "trident-notifications"
+            Octopus.Action.RunOnServer = "false"
         }
     }
 }
