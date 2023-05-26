@@ -1,2 +1,2 @@
-# OctoPetShop
-Demo repo for the Octopets deployment process
+# OctoPet Shop
+Demo repo for the Octopet Shop deployment process
